@@ -87,22 +87,31 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias pmr="python manage.py runserver"
 alias pmt="python manage.py test"
+alias pms="python manage.py shell"
 alias pmmm="python manage.py makemigrations"
 alias pmm="python manage.py migrate"
 alias cpd="cap production deploy"
 alias csd="cap staging deploy"
-alias py='python3.4'
-alias wasup='git status'
-alias yolo='git push'
-alias gime='git pull'
+alias py="python3.5"
+alias ga="git add"
+alias gc="git commit"
+alias gs="git status"
+alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --stat"
+alias yolo="git push"
+alias gime="git pull"
+alias goto="git checkout"
+alias internetpls="sudo kill -9 $(pgrep NetworkManager)"
+alias enterpls="stty sane"
 
 # Config for Genata's cute jump
 eval "$(jump shell zsh)"
 
 # Config for virtualenvwrapper
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Devel
-source /usr/local/bin/virtualenvwrapper.sh
+# export WORKON_HOME=$HOME/.virtualenvs
+# export PROJECT_HOME=$HOME/Devel
+# source /usr/local/bin/virtualenvwrapper.sh
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+export NVM_DIR="/home/pgergov/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
