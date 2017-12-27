@@ -45,6 +45,9 @@
 ;; no need for useles pop up window
 (setq ns-pop-up-frames nil)
 
+;; or the welcome screen
+(setq inhibit-startup-screen t)
+
 ;; no need for toolbar
 (when (fboundp 'tool-bar-mode)
   (tool-bar-mode -1))
