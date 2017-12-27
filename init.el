@@ -145,12 +145,28 @@
 (use-package prettier-js
   :ensure t)
 
-(use-package rjsx-mode
+(use-package js2-mode
   :ensure t
   :config
-  (add-hook 'js-mode-hook 'js2-minor-mode)
-  ;; rjsx relies on js2-mode -> that's why next line is here
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
   (setq-default js2-basic-offset 2))
+
+(use-package rjsx-mode
+  :ensure t)
+
+(use-package js2-refactor
+  :ensure t
+  :config
+  (add-hook 'js2-mode-hook #'js2-refactor-mode)
+  (js2r-add-keybindings-with-prefix "C-c C-r")
+  (define-key js2-mode-map (kbd "C-k") #'js2r-kill))
+
+(use-package xref-js2
+  :ensure t
+  :config
+  (define-key js2-mode-map (kbd "M-.") nil)
+  (add-hook 'js2-mode-hook (lambda ()
+    (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t))))
 
 (use-package drag-stuff
   :ensure t
@@ -169,7 +185,7 @@
     ("ff7625ad8aa2615eae96d6b4469fcc7d3d20b2e1ebc63b761a349bebbb9d23cb" default)))
  '(package-selected-packages
    (quote
-    (drag-stuff rjsx-mode dracula-theme prettier-js dumb-jump rainbow-delimiters projectile ag neotree git-gutter elpy anaconda-mode))))
+    (xref-js2 js2-refactor drag-stuff rjsx-mode dracula-theme prettier-js dumb-jump rainbow-delimiters projectile ag neotree git-gutter elpy anaconda-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
