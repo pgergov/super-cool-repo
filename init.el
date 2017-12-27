@@ -85,6 +85,9 @@
 (setq split-height-threshold nil)
 (setq split-width-threshold 120)
 
+;; smart tab behavior - indent or complete
+(setq tab-always-indent 'complete)
+
 (prefer-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
 (set-terminal-coding-system 'utf-8)
@@ -121,7 +124,6 @@
 (use-package neotree
   :ensure t
   :config
-  (setq neo-smart-open t)
   (setq neo-theme 'ascii))
 
 (use-package ag
@@ -130,7 +132,8 @@
 (use-package projectile
   :ensure t
   :config
-  (projectile-global-mode +1))
+  (projectile-global-mode +1)
+  (setq projectile-switch-project-action 'neotree-projectile-action))
 
 (use-package rainbow-delimiters
   :ensure t
@@ -231,15 +234,36 @@
 	(dumb-jump-back)
 	(dumb-jump-go)))))
 
+(defun my-neotree-project-dir-toggle ()
+  "Open NeoTree using project root via `find-file-in-project` or the current buffer directory."
+  (interactive)
+  (let ((project-dir
+         (ignore-errors
+           ;;; Pick one: projectile or find-file-in-project
+           ; (projectile-project-root)
+           (ffip-project-root)
+           ))
+        (file-name (buffer-file-name))
+        (neo-smart-open t))
+    (if (and (fboundp 'neo-global--window-exists-p)
+             (neo-global--window-exists-p))
+        (neotree-hide)
+      (progn
+        (neotree-show)
+        (if project-dir
+            (neotree-dir project-dir))
+        (if file-name
+            (neotree-find file-name))))))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;  key bindings  ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
 
 (global-set-key (kbd "C-;") 'find-file)
 (global-set-key (kbd "C-o") 'other-window)
+(global-set-key (kbd "M-,") 'pop-tag-mark)
 (global-set-key (kbd "C-M-;") 'find-file-other-window)
 (global-set-key (kbd "<C-tab>") 'mode-line-other-buffer)
-(global-set-key (kbd "M-,") 'pop-tag-mark)
 
 ;; use `d` to delete characters
 (global-set-key (kbd "C-M-d") 'delete-char)
@@ -254,9 +278,9 @@
 (global-set-key (kbd "C-c i") 'my-python-breakpoint)
 (global-set-key (kbd "C-c o") 'my-insert-line-before)
 (define-key elpy-mode-map (kbd "M-.") 'my-goto-definition)
+(global-set-key (kbd "C-c t") 'my-neotree-project-dir-toggle)
 (global-set-key (kbd "C-c m") 'my-rack-brackets-on-new-indented-line)
 
 ;; packages
-(global-set-key (kbd "C-c j") 'projectile-switch-to-buffer)
 (global-set-key (kbd "C-c k") 'projectile-find-file)
-(global-set-key (kbd "C-c t") 'neotree-toggle)
+(global-set-key (kbd "C-c j") 'projectile-switch-to-buffer)
