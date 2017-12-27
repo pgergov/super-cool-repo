@@ -1,4 +1,3 @@
-# ZSH Theme - Preview: http://gyazo.com/8becc8a7ed5ab54a0262a470555c3eed.png
 eval my_blue='$fg[blue]'
 eval my_green='$fg[green]'
 eval my_red='$fg[red]'
