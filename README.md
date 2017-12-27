@@ -1,7 +1,3 @@
-## super-cool-repo
-
-* Lock, stock and a barrel
-
 ## In this repository you'll find:
 
 * Custom `oh-my-zsh` theme
