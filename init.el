@@ -115,7 +115,8 @@
 (use-package git-gutter
   :ensure t
   :config
-  (global-git-gutter-mode +1))
+  (global-git-gutter-mode +1)
+  (set-face-foreground 'git-gutter:modified "yellow"))
 
 (use-package neotree
   :ensure t
@@ -237,5 +238,3 @@
 (global-set-key (kbd "C-c j") 'projectile-switch-to-buffer)
 (global-set-key (kbd "C-c k") 'projectile-find-file)
 (global-set-key (kbd "C-c t") 'neotree-toggle)
-
-(set-face-foreground 'git-gutter:modified "yellow")
