@@ -1,11 +1,13 @@
-# Path to your oh-my-zsh installation.
-export ZSH=/home/pgergov/.oh-my-zsh
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="bira-fix"
+# Path to your oh-my-zsh installation.
+export ZSH=/Users/pgergov/.oh-my-zsh
+
+# Set name of the theme to load. Optionally, if you set this to "random"
+# it'll load a random theme each time that oh-my-zsh is loaded.
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+ZSH_THEME="pgergov-theme"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -18,7 +20,7 @@ ZSH_THEME="bira-fix"
 # DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+export UPDATE_ZSH_DAYS=30
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -49,17 +51,13 @@ ZSH_THEME="bira-fix"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git virtualenv)
+plugins=(git pip python brew osx zsh-syntax-highlighting)
+
+source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 # export MANPATH="/usr/local/man:$MANPATH"
-
-# export TERM 256colors
-export TERM=xterm-256color
-
-source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -75,45 +73,49 @@ source $ZSH/oh-my-zsh.sh
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
+# export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-alias pmr="python manage.py runserver"
+#
+# Django
 alias pmt="python manage.py test"
 alias pms="python manage.py shell"
-alias pmmm="python manage.py makemigrations"
 alias pmm="python manage.py migrate"
-alias cpd="cap production deploy"
-alias csd="cap staging deploy"
-alias py="python3.5"
+alias pmr="python manage.py runserver"
+alias pmmm="python manage.py makemigrations"
+#
+# Git
 alias ga="git add"
 alias gc="git commit"
 alias gs="git status"
-alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --stat"
 alias yolo="git push"
 alias gime="git pull"
 alias goto="git checkout"
-# alias internetpls="sudo kill -9 $(pgrep NetworkManager)"
-alias internetpls="sudo service network-manager restart"
-alias enterpls="stty sane"
-alias gocolab="source ~/envs/tc-firelink/bin/activate && j colab"
+alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --stat"
+#
+# Python
+alias pip="pip3"
+alias py="python3"
+#
+# Emacs
+alias emacs='open -a /Applications/Emacs.app $1'
+#
+# Work
+alias gocolab="source ~/.pyenv/versions/tc-colab-3.6.2/bin/activate && j tc-colab"
 
-# Config for Genata's cute jump
-eval "$(jump shell zsh)"
-
-# Config for virtualenvwrapper
-# export WORKON_HOME=$HOME/.virtualenvs
-# export PROJECT_HOME=$HOME/Devel
-# source /usr/local/bin/virtualenvwrapper.sh
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-export NVM_DIR="/home/pgergov/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+# Configurations
+#
+# Genata's cure jump <3
+eval "$(jump shell)"
+#
+# Pyenv
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+#
+# Nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
