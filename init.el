@@ -152,6 +152,12 @@
   ;; rjsx relies on js2-mode -> that's why next line is here
   (setq-default js2-basic-offset 2))
 
+(use-package drag-stuff
+  :ensure t
+  :config
+  (drag-stuff-global-mode 1)
+  (drag-stuff-define-keys))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -163,7 +169,7 @@
     ("ff7625ad8aa2615eae96d6b4469fcc7d3d20b2e1ebc63b761a349bebbb9d23cb" default)))
  '(package-selected-packages
    (quote
-    (rjsx-mode dracula-theme prettier-js dumb-jump rainbow-delimiters projectile ag neotree git-gutter elpy anaconda-mode))))
+    (drag-stuff rjsx-mode dracula-theme prettier-js dumb-jump rainbow-delimiters projectile ag neotree git-gutter elpy anaconda-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
