@@ -284,7 +284,7 @@
 (global-set-key (kbd "C-c i") 'my-python-breakpoint)
 (global-set-key (kbd "C-c o") 'my-insert-line-before)
 (define-key elpy-mode-map (kbd "M-.") 'my-goto-definition)
-(global-set-key (kbd "C-c t") 'my-neotree-project-dir-toggle)
+(global-set-key (kbd "C-c C-t") 'my-neotree-project-dir-toggle)
 (global-set-key (kbd "C-c m") 'my-rack-brackets-on-new-indented-line)
 
 ;; packages
