@@ -48,7 +48,7 @@
 ;; or welcome screen
 (setq inhibit-startup-screen t)
 
-;; no need for toolbar
+;; or toolbar
 (when (fboundp 'tool-bar-mode)
   (tool-bar-mode -1))
 
@@ -63,13 +63,13 @@
       scroll-conservatively 100000
       scroll-preserve-screen-position 1)
 
-;; default font-size
-(set-face-attribute 'default nil :height 140)
-
 ;; line settings
 (line-number-mode t)
 (column-number-mode t)
 (size-indication-mode t)
+
+;; default font-size
+(set-face-attribute 'default nil :height 140)
 
 ;; Newline at end of file
 (setq require-final-newline t)
@@ -137,6 +137,9 @@
 
 (use-package projectile
   :ensure t
+  :bind
+  ("C-c k" . projectile-find-file)
+  ("C-c j" . projectile-switch-to-buffer)
   :config
   (projectile-global-mode +1)
   (setq projectile-switch-project-action 'neotree-projectile-action))
@@ -152,7 +155,16 @@
   (dumb-jump-mode))
 
 (use-package prettier-js
-  :ensure t)
+  :ensure t
+  :config
+  (setq prettier-js-args '(
+    "--print-width" "80"
+    "--tab-width" "2"
+    "--single-quote" "true"
+    "--trailing-comma" "none"
+    "--no-bracket-spacing" "false"
+    "--jsx-bracket-same-line" "true"
+  )))
 
 (use-package js2-mode
   :ensure t
@@ -197,7 +209,7 @@
     ("ff7625ad8aa2615eae96d6b4469fcc7d3d20b2e1ebc63b761a349bebbb9d23cb" default)))
  '(package-selected-packages
    (quote
-    (xref-js2 js2-refactor drag-stuff rjsx-mode dracula-theme prettier-js dumb-jump rainbow-delimiters projectile ag neotree git-gutter elpy anaconda-mode))))
+    (json-mode xref-js2 js2-refactor use-package prettier-js js2-mode rjsx-mode dracula-theme rainbow-delimiters projectile neotree git-gutter elpy dumb-jump drag-stuff anaconda-mode ag))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -287,9 +299,5 @@
 (global-set-key (kbd "C-c i") 'my-python-breakpoint)
 (global-set-key (kbd "C-c o") 'my-insert-line-before)
 (define-key elpy-mode-map (kbd "M-.") 'my-goto-definition)
-(global-set-key (kbd "C-c C-t") 'my-neotree-project-dir-toggle)
+(global-set-key (kbd "C-c t") 'my-neotree-project-dir-toggle)
 (global-set-key (kbd "C-c m") 'my-rack-brackets-on-new-indented-line)
-
-;; packages
-(global-set-key (kbd "C-c k") 'projectile-find-file)
-(global-set-key (kbd "C-c j") 'projectile-switch-to-buffer)
