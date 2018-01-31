@@ -141,8 +141,8 @@
   ("C-c k" . projectile-find-file)
   ("C-c j" . projectile-switch-to-buffer)
   :config
-  (projectile-global-mode +1)
-  (setq projectile-switch-project-action 'neotree-projectile-action))
+  (setq projectile-completion-system 'ivy)
+  (projectile-global-mode +1))
 
 (use-package rainbow-delimiters
   :ensure t
@@ -197,6 +197,13 @@
 
 (use-package json-mode
   :ensure t)
+
+(use-package ivy
+  :ensure t
+  :config
+    (ivy-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
