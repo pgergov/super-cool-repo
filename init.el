@@ -69,7 +69,7 @@
 (size-indication-mode t)
 
 ;; default font-size
-(set-face-attribute 'default nil :height 140)
+(set-face-attribute 'default nil :height 125)
 
 ;; Newline at end of file
 (setq require-final-newline t)
@@ -137,9 +137,6 @@
 
 (use-package projectile
   :ensure t
-  :bind
-  ("C-c k" . projectile-find-file)
-  ("C-c j" . projectile-switch-to-buffer)
   :config
   (setq projectile-completion-system 'ivy)
   (projectile-global-mode +1))
@@ -173,7 +170,9 @@
   (setq-default js2-basic-offset 2))
 
 (use-package rjsx-mode
-  :ensure t)
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode)))
 
 (use-package js2-refactor
   :ensure t
@@ -205,18 +204,21 @@
   (setq ivy-use-virtual-buffers t)
   (setq enable-recursive-minibuffers t))
 
+(use-package indent-tools
+  :ensure t)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (dracula)))
+ '(custom-enabled-themes nil)
  '(custom-safe-themes
    (quote
     ("ff7625ad8aa2615eae96d6b4469fcc7d3d20b2e1ebc63b761a349bebbb9d23cb" default)))
  '(package-selected-packages
    (quote
-    (json-mode xref-js2 js2-refactor use-package prettier-js js2-mode rjsx-mode dracula-theme rainbow-delimiters projectile neotree git-gutter elpy dumb-jump drag-stuff anaconda-mode ag))))
+    (indent-tools json-mode xref-js2 js2-refactor use-package prettier-js js2-mode rjsx-mode dracula-theme rainbow-delimiters projectile neotree git-gutter elpy dumb-jump drag-stuff anaconda-mode ag))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -292,6 +294,7 @@
 (global-set-key (kbd "M-,") 'pop-tag-mark)
 (global-set-key (kbd "C-M-;") 'find-file-other-window)
 (global-set-key (kbd "<C-tab>") 'mode-line-other-buffer)
+(global-set-key (kbd "C-x p") 'prettier-js)
 
 ;; use `d` to delete characters
 (global-set-key (kbd "C-M-d") 'delete-char)
@@ -308,3 +311,7 @@
 (define-key elpy-mode-map (kbd "M-.") 'my-goto-definition)
 (global-set-key (kbd "C-c t") 'my-neotree-project-dir-toggle)
 (global-set-key (kbd "C-c m") 'my-rack-brackets-on-new-indented-line)
+
+;; packages
+(global-set-key (kbd "C-c k") 'projectile-find-file)
+(global-set-key (kbd "C-c j") 'projectile-switch-to-buffer)
