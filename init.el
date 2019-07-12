@@ -189,6 +189,33 @@
   (add-hook 'js2-mode-hook (lambda ()
     (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t))))
 
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (eldoc-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (tide-hl-identifier-mode +1)
+  (company-mode +1))
+
+(use-package tide
+  :ensure t
+  :after (typescript-mode company flycheck)
+  :hook ((typescript-mode . tide-setup)
+         (typescript-mode . tide-hl-identifier-mode)))
+
+(use-package web-mode
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+  (setq web-mode-enable-auto-indentation nil)
+  (setq web-mode-code-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-markup-indent-offset 2)
+  (add-hook 'web-mode-hook
+	    (lambda ()
+	      (setup-tide-mode))))
+
 (use-package drag-stuff
   :ensure t
   :config
@@ -205,18 +232,17 @@
   (setq ivy-use-virtual-buffers t)
   (setq enable-recursive-minibuffers t))
 
+(use-package indent-tools
+  :ensure t)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (dracula)))
- '(custom-safe-themes
-   (quote
-    ("ff7625ad8aa2615eae96d6b4469fcc7d3d20b2e1ebc63b761a349bebbb9d23cb" default)))
  '(package-selected-packages
    (quote
-    (json-mode xref-js2 js2-refactor use-package prettier-js js2-mode rjsx-mode dracula-theme rainbow-delimiters projectile neotree git-gutter elpy dumb-jump drag-stuff anaconda-mode ag))))
+    (jedi indent-tools web-mode tide json-mode drag-stuff xref-js2 js2-refactor rjsx-mode js2-mode prettier-js dumb-jump rainbow-delimiters projectile ag neotree git-gutter elpy anaconda-mode use-package dracula-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -292,6 +318,7 @@
 (global-set-key (kbd "M-,") 'pop-tag-mark)
 (global-set-key (kbd "C-M-;") 'find-file-other-window)
 (global-set-key (kbd "<C-tab>") 'mode-line-other-buffer)
+(global-set-key (kbd "C-x p") 'prettier-js)
 
 ;; use `d` to delete characters
 (global-set-key (kbd "C-M-d") 'delete-char)
