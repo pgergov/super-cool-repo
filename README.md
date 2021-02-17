@@ -1,5 +1,11 @@
-## In this repository you'll find:
+# Setup 101
+
+## Milestones
+
+* Start date: `19 Jun 2016`
+
+## Content
 
 * Custom `oh-my-zsh` theme
-* `zsh` configuration with some Python/Django aliases and pyenv/nvm configs
-* Emacs `init.el` configuration setup suitable for Python/JS development
+* `.zshrc` setup suitable for Python (Django) and JavaScript development
+* `init.el` setup suitable for Python / JavaScript (TypeScript) development
