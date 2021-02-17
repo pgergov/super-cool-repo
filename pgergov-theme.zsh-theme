@@ -3,16 +3,16 @@ eval my_green='$fg[green]'
 eval my_red='$fg[red]'
 eval my_yellow='$FG[136]'
 
-local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
+# local user_symbol='♥'
+local user_symbol='%{$my_red%}❤%f'
 local user_host='%{$my_green%}%n%{$reset_color%}'
 local current_dir='%{$my_blue%}%~%{$reset_color%}'
-local user_symbol='♥'
 local git_branch='$(git_prompt_info)%{$reset_color%}'
-
+local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
+local virtualenv='%{$my_yellow%}$(virtualenv_prompt_info)%{$reset_color%} '
 # local current_time='%{$my_green%}%T%{$reset_color%}'
-# local virtualenv='%{$my_purple%}(virtualenv_prompt_info)%{$reset_color%} '
 
-PROMPT="${user_host} ${current_dir} ${git_branch}
+PROMPT="${virtualenv}${user_host} ${current_dir} ${git_branch}
 %B${user_symbol}%b "
 RPS1="${return_code}"
 
