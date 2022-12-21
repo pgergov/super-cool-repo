@@ -1,4 +1,6 @@
 \#*\#
 *.elc
+*/__pycache__/
 .\#*
 .projectile
+.DS_Store
