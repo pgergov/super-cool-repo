@@ -114,7 +114,9 @@
 
 ;; Blackish theme
 (use-package dracula-theme
-  :ensure t)
+  :ensure t
+  :config
+  (load-theme 'dracula t))
 
 ;; Better completion
 (use-package ivy
@@ -238,11 +240,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes '(dracula))
- '(custom-safe-themes
-   '("2dff5f0b44a9e6c8644b2159414af72261e38686072e063aa66ee98a2faecf0e" default))
  '(package-selected-packages
-   '(auto-virtualenv markdown-mode ivy drag-stuff web-mode yaml-mode tide rainbow-delimiters projectile use-package neotree git-gutter elpy dracula-theme anaconda-mode ag)))
+   '(markdown-mode yaml-mode drag-stuff rainbow-delimiters web-mode tide auto-virtualenv anaconda-mode elpy git-gutter neotree projectile ag ivy dracula-theme use-package)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

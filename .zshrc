@@ -2,13 +2,13 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/pgergov/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="pgergov-theme"
+ZSH_THEME="pgergov"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -23,14 +23,13 @@ ZSH_THEME="pgergov-theme"
 # Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
+# Uncomment one of the following lines to change the auto-update behavior
+# zstyle ':omz:update' mode disabled  # disable automatic updates
+# zstyle ':omz:update' mode auto      # update automatically without asking
+# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).
-export UPDATE_ZSH_DAYS=30
+# zstyle ':omz:update' frequency 13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 DISABLE_MAGIC_FUNCTIONS="true"
@@ -45,6 +44,9 @@ DISABLE_MAGIC_FUNCTIONS="true"
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
+# You can also set it to another string to have that shown instead of the default red dots.
+# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
+# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
 # COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
@@ -69,6 +71,7 @@ DISABLE_MAGIC_FUNCTIONS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git virtualenv zsh-autosuggestions zsh-syntax-highlighting)
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -93,14 +96,6 @@ source $ZSH/oh-my-zsh.sh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
-# Django
-alias pmt="pytest --reuse-db --tb=native -s"
-alias pms="python manage.py shell"
-alias pms+="python manage.py shell_plus"
-alias pmr="python manage.py runserver"
-alias pmm="python manage.py migrate"
-alias pmmm="python manage.py makemigrations"
-#
 # Git
 alias ga="git add -p"
 alias gc="git commit"
@@ -113,20 +108,19 @@ alias goto="git checkout"
 alias py="python3"
 alias py+="ipython"
 #
-# Projects
+# Django
+alias pmr="python manage.py runserver"
+alias pmm="python manage.py migrate"
+alias pmmm="python manage.py makemigrations"
+alias pmt="pytest --reuse-db --tb=native -s"
+alias pms="python manage.py shell"
+alias pms+="python manage.py shell_plus"
 #
-# Configurations
-
 # Genata's cute tool <3 
 eval "$(jump shell)"
-
+#
 # Pyenv
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 export PATH=~/.pyenv/shims:$PATH
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-
-# Add Postgres to the PATH
-export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
-
-# Nvm
